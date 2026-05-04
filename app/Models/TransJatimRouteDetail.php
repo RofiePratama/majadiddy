@@ -10,6 +10,11 @@ class TransJatimRouteDetail extends Model
     //
     protected $table = 'trans_jatim__detail__routes';
 
+    protected $hidden = [
+        'id',
+        'transjatim_route_id'
+    ];
+
     public function transjatim():BelongsTo{
         return $this->belongsTo(TransJatim::class);
     }

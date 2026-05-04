@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class TransJatimTripsSeeder extends Seeder
 {
@@ -15,6 +16,6 @@ class TransJatimTripsSeeder extends Seeder
         //
         DB::table('transjatim_trips')->insert([
             []
-        ])
+        ]);
     }
 }

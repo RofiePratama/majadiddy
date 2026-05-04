@@ -17,8 +17,9 @@ return new class extends Migration
             $table->string('title');
             $table->text('content');
             $table->string('author');
-
-            $table->timestamp('published_at')->nullable();
+            $table->string('article_url');
+            $table->timestamp('published_at');
+            $table->timestamp('created_at');
         });
     }
 

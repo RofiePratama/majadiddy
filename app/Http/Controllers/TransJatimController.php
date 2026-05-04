@@ -11,23 +11,30 @@ class TransJatimController extends Controller
     //
     public function index() {
         $route = TransJatim::all();
-        return response()->json($route);
+        return response()->json([
+            'status'=>'success',
+            'message'=>'success retrieved data',
+            'data'=>$route
+        ],200);
     }
 
-    public function detail(Request $request) {
-        $route_id = $request->id;
+    public function show($id) {
+        $route_id = $id;
 
         $route = TransJatim::with('route_details')
             ->where('id', $route_id)
             ->first();
 
         if (!$route) {
-            return response()->json(['message' => 'Data tidak ditemukan'], 404);
+            return response()->json([
+                'status'=>'error',
+                'message' => 'Data tidak ditemukan'
+            ], 404);
         }
 
         return response()->json([
-            'status' => 1,
-            'message' => 'Success',
+            'status' => 'success',
+            'message' => 'Success retrieved data',
             'data' => [
                 'route_name'=>$route->route_name,
                 'start_point'=>$route->start_point,
@@ -35,6 +42,6 @@ class TransJatimController extends Controller
                 'ticket_price'=>$route->price,
                 'route' => $route->route_details
             ]
-        ]);
+        ],200);
     }
 }

@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('category');
             $table->string('source_agency');
             $table->string('dataset_url');
-
-            $table->timestamp('created_at')->nullable();
+            $table->timestamp('published_at');
+            $table->timestamp('created_at');
         });
     }
 
