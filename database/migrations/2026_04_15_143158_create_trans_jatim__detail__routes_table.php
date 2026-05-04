@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('halte_name');
             $table->string('latitude');
             $table->string('longitude');
+            $table->timestamp('updated_at');
 
             $table->foreignId('transjatim_route_id')->constrained('transjatim_route');
         });

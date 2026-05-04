@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('dataset_url');
             $table->timestamp('published_at');
             $table->timestamp('created_at');
+            $table->timestamp('updated_at');
         });
     }
 

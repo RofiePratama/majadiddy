@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('article_url');
             $table->timestamp('published_at');
             $table->timestamp('created_at');
+            $table->timestamp('updated_at');
         });
     }
 
