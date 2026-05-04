@@ -61,7 +61,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     //role admin
     Route::middleware(['role:admin'])->group(function() {
         //transjatim
-        Route::post('/route',TransJatimController::class,'store');
+        Route::post('/route',[TransJatimController::class,'store']);
         
         //opendata
         Route::post('/datasets',[OpenDataController::class,'storeDataset']);
