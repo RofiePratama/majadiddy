@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\AntrianPasienController;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\TransJatimController;
@@ -56,6 +57,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
     //role
     Route::middleware(['role:user'])->group(function() {
         Route::post('/rumah-sakit',[RumahSakitController::class,'store']);
+
+        //rs
+        Route::get('/rumah-sakit', [RumahSakitController::class, 'index']);
+        Route::get('/rumah-sakit/search', [RumahSakitController::class, 'search']);
+        Route::get('/rumah-sakit/{id}', [RumahSakitController::class, 'show']);
+        Route::get('/rumah-sakit/{id}/antrian', [RumahSakitController::class, 'antrian']);
+
+        Route::post('/antrian/daftar', [AntrianPasienController::class, 'daftarAntrian']);
     });
 
     //role admin
