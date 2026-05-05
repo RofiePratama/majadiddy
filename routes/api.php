@@ -38,4 +38,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/rumah-sakit', [RumahSakitController::class, 'index']);
     Route::get('/rumah-sakit/search', [RumahSakitController::class, 'search']);
     Route::get('/rumah-sakit/{id}', [RumahSakitController::class, 'show']);
+
+    Route::get('/rumah-sakit/{id}/antrian', [RumahSakitController::class, 'antrian']);
 });
