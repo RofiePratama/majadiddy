@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids; // Tambahkan ini
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Laravel\Sanctum\HasApiTokens; // token login
+use Filament\Panel; //access admin
 
 // Update Fillable agar sesuai dengan kolom di migrasi MajaDigi kamu
 #[Fillable([
@@ -26,8 +27,7 @@ use Laravel\Sanctum\HasApiTokens; // token login
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasUuids; // Tambahkan HasUuids di sini
-    use HasFactory, Notifiable, HasUuids, HasApiTOkens; // Tambahkan HasUuids di sini, tambahan token
+    use HasFactory, Notifiable, HasUuids, HasApiTokens; // Tambahkan HasUuids di sini, tambahan token
 
     // Beritahu Laravel bahwa Primary Key kita adalah String (UUID)
     protected $keyType = 'string';
@@ -47,5 +47,9 @@ class User extends Authenticatable
             'latitude' => 'decimal:7',
             'longitude' => 'decimal:7',
         ];
+    }
+    public function canAccessPanel(Panel $panel): bool //access admin
+    {
+        return $this->role === 'admin';
     }
 }

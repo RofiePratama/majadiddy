@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('sessions', function (Blueprint $user_id) {
             $user_id->string('id')->primary();
-            $user_id->foreignId('user_id')->nullable()->index();
+            $user_id->foreignUuid('user_id')->nullable()->index();
             $user_id->string('ip_address', 45)->nullable();
             $user_id->text('user_agent')->nullable();
             $user_id->longText('payload');

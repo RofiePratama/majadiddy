@@ -17,8 +17,9 @@ return new class extends Migration
             $table->string('route_name');
             $table->string('start_point');
             $table->string('end_point');
+            $table->timestamp('updated_at');
 
-            $table->decimal('ticket_price', 10, 2);
+            $table->decimal('ticket_price', 10, 2)->nullable();
         });
     }
 

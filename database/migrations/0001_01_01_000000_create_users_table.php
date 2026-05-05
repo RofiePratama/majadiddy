@@ -21,7 +21,7 @@ return new class extends Migration
         $table->decimal('latitude', 10, 7)->nullable();
         $table->decimal('longitude', 10, 7)->nullable();
         $table->date('birth_date')->nullable();
-        $table->string('role');
+        $table->enum('role',['user','admin']);
         $table->timestamp('created_at')->useCurrent();
         $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
     });

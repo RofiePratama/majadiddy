@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class open_data_dataset extends Model
+class transjatim_route_detail extends Model
 {
     //
 }

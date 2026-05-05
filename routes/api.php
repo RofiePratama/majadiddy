@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OpenDataController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RumahSakitController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
@@ -7,6 +8,8 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Http\Request;
+
+use App\Http\Controllers\TransJatimController;
 
 // --- GUEST ROUTES ---
 Route::middleware('guest')->group(function () {
@@ -23,10 +26,25 @@ Route::middleware('guest')->group(function () {
     // Eksekusi reset password (Controller yang kamu kirim tadi)
     Route::post('/reset-password', [NewPasswordController::class, 'store'])
                 ->name('password.store');
+
+    //transjatim
+    Route::get('/route', [TransJatimController::class, 'index']);
+    Route::get('/route/{id}',[TransJatimController::class,'show']);
+
+    //rs
+    Route::get('/rumah-sakit', [RumahSakitController::class, 'index']);
+    Route::get('/rumah-sakit/search', [RumahSakitController::class, 'search']);
+    Route::get('/rumah-sakit/{id}', [RumahSakitController::class, 'show']);
+
+    //open data
+    Route::get('/datasets',[OpenDataController::class, 'indexDatasets']);
+    Route::get('/articles',[OpenDataController::class,'indexArticles']);
+    Route::get('/datasets/{id}',[OpenDataController::class, 'showDataset']);
+    Route::get('/articles/{id}',[OpenDataController::class,'showArticle']);
 });
 
 // --- AUTHENTICATED ROUTES ---
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
 
@@ -35,9 +53,22 @@ Route::middleware('auth:sanctum')->group(function () {
         return $request->user();
     });
 
-    Route::get('/rumah-sakit', [RumahSakitController::class, 'index']);
-    Route::get('/rumah-sakit/search', [RumahSakitController::class, 'search']);
-    Route::get('/rumah-sakit/{id}', [RumahSakitController::class, 'show']);
+    //role
+    Route::middleware(['role:user'])->group(function() {
+        Route::post('/rumah-sakit',[RumahSakitController::class,'store']);
+    });
 
-    Route::get('/rumah-sakit/{id}/antrian', [RumahSakitController::class, 'antrian']);
+    //role admin
+    Route::middleware(['role:admin'])->group(function() {
+        //transjatim
+        Route::post('/route',[TransJatimController::class,'store']);
+        
+        //opendata
+        Route::post('/datasets',[OpenDataController::class,'storeDataset']);
+        Route::post('/articles',[OpenDataController::class,'storeArticle']);
+        Route::put('/datasets{id}',[OpenDataController::class,'updateDataset']);
+        Route::put('/articles{id}',[OpenDataController::class,'updateArticle']);
+        Route::delete('/datasets{id}',[OpenDataController::class,'destroyDataset']);
+        Route::delete('/articles{id}',[OpenDataController::class,'destroyArticle']);
+    });
 });
