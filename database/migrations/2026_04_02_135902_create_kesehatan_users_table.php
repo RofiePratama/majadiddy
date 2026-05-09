@@ -22,10 +22,10 @@ return new class extends Migration
                 $table->string('blood_type')->nullable();
                 $table->string('vaccination_status')->nullable();
 
-                $table->uuid('medical_record_id')->nullable();
-                $table->foreign('medical_record_id')
+                $table->uuid('medical_records_id')->nullable();
+                $table->foreign('medical_records_id')
                     ->references('id')
-                    ->on('medical_record');
+                    ->on('medical_records');
             });
     }
 
