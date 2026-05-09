@@ -11,7 +11,6 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kesehatan_users', function (Blueprint $table) {
             Schema::create('kesehatan_user', function (Blueprint $table) {
 
                 $table->uuid('id')->primary();
@@ -28,7 +27,6 @@ return new class extends Migration
                     ->references('id')
                     ->on('medical_record');
             });
-        });
     }
 
     /**
