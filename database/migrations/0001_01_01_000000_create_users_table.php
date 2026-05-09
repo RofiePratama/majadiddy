@@ -24,6 +24,7 @@ return new class extends Migration
         $table->enum('role',['user','admin']);
         $table->timestamp('created_at')->useCurrent();
         $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
+        $table->timestamp('email_verified_at')->nullable();
     });
     }
 
