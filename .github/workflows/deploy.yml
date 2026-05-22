@@ -19,3 +19,5 @@ jobs:
           script: |
             cd ~/cd-dev-backend
             ./deploy.sh
+      - name: Check Host
+        run: echo "${{ secrets.SSH_HOST }}"
